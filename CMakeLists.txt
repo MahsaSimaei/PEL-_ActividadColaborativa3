@@ -4,4 +4,5 @@ project(PEL__ActividadColaborativa3)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(PEL__ActividadColaborativa3 main.cpp
-        Vector.h)
+        Vector.h
+        Dynarray.h)

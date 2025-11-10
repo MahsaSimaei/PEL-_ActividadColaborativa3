@@ -17,11 +17,9 @@ private:
 
     // Función privada para comprobar si el índice está dentro del rango válido.
     // Si no lo está, imprime un error y termina el programa.
-    void bounds_check( int i) const {
+    void bounds_check(int i) const {
         if (i >= size()) {
-            // En C++ profesional usarías throw, aquí sólo mensaje y exit.
-            printf("Error: Índice fuera de rango (%u, tamaño %u).\n", i, size());
-            exit(1); // Termina el programa.
+            throw std::out_of_range("Índice fuera de rango");
         }
     }
 
