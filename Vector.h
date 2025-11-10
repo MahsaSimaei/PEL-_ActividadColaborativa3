@@ -112,5 +112,25 @@ public:
             ++space_; // Avanzamos puntero de fin de datos.
         }
     }
+    // Elimina el último elemento si el vector no está vacío.
+    void pop_back() {
+        if (empty()) throw std::out_of_range("pop_back() en un array vacío");
+        --size; // o --space_; según la clase
+    }
+
+    // Elimina el elemento en el índice index.
+    void remove_at(int index) {
+        bounds_check(index);
+        for (int i = index; i < size() - 1; ++i)
+            v_[i] = v_[i+1];
+        --space_;
+    }
+
+    // Busca el vector, devuelve índice o -1 si no está.
+    int find(const T& value) const {
+        for (int i = 0; i < size(); ++i)
+            if (v_[i] == value) return i;
+        return -1;
+    }
 };
 #endif //VECTOR_H
