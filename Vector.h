@@ -132,5 +132,28 @@ public:
             if (v_[i] == value) return i;
         return -1;
     }
+
+    //  Inserta valor en la posición dada, desplazando el resto.
+    void insert(int pos, const T& value) {
+        if (pos < 0 || pos > size()) throw std::out_of_range("Índice fuera de rango");
+        if (space_ == last_) {
+            int cp = capacity();
+            int new_cp = (cp == 0) ? 2 : 2 * cp;
+            T* new_block = new T[new_cp];
+            // copy elements up to pos
+            for(int i=0;i<pos;++i) new_block[i]=v_[i];
+            new_block[pos]=value;
+            for(int i=pos;i<size();++i) new_block[i+1]=v_[i];
+            delete[] v_;
+            v_=new_block;
+            space_=new_block+size()+1;
+            last_=new_block+new_cp;
+        } else {
+            for(int i=size();i>pos;--i)
+                v_[i]=v_[i-1];
+            v_[pos]=value;
+            ++space_;
+        }
+    }
 };
 #endif //VECTOR_H

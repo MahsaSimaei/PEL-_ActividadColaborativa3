@@ -102,6 +102,15 @@ public:
             }
         }
     }
+    // Inserta un elemento en una posición concreta, desplazando los siguientes.
+    void insert(size_t pos, const T& value) {
+        if (pos > size) throw std::out_of_range("Índice fuera de rango");
+        if (size == capacity) resize(capacity * 2);
+        for (size_t i = size; i > pos; --i) {
+            data[i] = data[i-1];
+        }
+        data[pos] = value;
+        ++size;
+    }
 };
-
 #endif //DYNARRAY_H
