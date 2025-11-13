@@ -16,7 +16,7 @@ void buscarCancionPorGenero(const Vector<Cancion>& canciones, const string& inpu
 void mostrarTodasLasCanciones(const Vector<Cancion>& canciones);
 
 // --- PROTOTIPO MENÚ ---
-void menu(Vector<Cancion>& canciones, DynarrayPEL<Titulo>& titulos);
+void menu(Vector<Cancion>& canciones, DynarrayPEL& titulos);
 
 int main() {
     Vector<Cancion> canciones;
