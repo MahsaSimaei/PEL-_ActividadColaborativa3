@@ -1,23 +1,34 @@
 #include <iostream>
 #include <string>
 #include "Vector.h"
-#include "Dynarray.h"
 #include "Cancion.h"
+#include "DynarrayPEL.h"
 #include "Titulo.h"
 
 using namespace std;
 
 // Prototipos de funciones para el menú
 void cargarCancionesEjemplo(Vector<Cancion>& canciones);
-void cargarTitulosEjemplo(Dynarray<Titulo>& titulos);
-void menu(Vector<Cancion>& canciones, Dynarray<Titulo>& titulos);
+void buscarCancionPorTitulo(const Vector<Cancion>& canciones, const string& input);
+void buscarCancionPorAlbum(const Vector<Cancion>& canciones, const string& input);
+void buscarCancionPorGrupo(const Vector<Cancion>& canciones, const string& input);
+void buscarCancionPorGenero(const Vector<Cancion>& canciones, const string& input);
+void mostrarTodasLasCanciones(const Vector<Cancion>& canciones);
+
+// --- PROTOTIPO MENÚ ---
+void menu(Vector<Cancion>& canciones, DynarrayPEL<Titulo>& titulos);
 
 int main() {
     Vector<Cancion> canciones;
-    Dynarray<Titulo> titulos;
+    DynarrayPEL titulos;
 
     cargarCancionesEjemplo(canciones);
-    cargarTitulosEjemplo(titulos);
+    titulos.agregarTitulo(Titulo("Inception", "pelicula", "Sci-Fi", "UHD", true, true, 2.99f));
+    titulos.agregarTitulo(Titulo("Breaking Bad", "serie", "Drama", "FHD", true, false, 0.0f));
+    titulos.agregarTitulo(Titulo("Interstellar", "pelicula", "Sci-Fi", "FHD", true, false, 0.0f));
+    titulos.agregarTitulo(Titulo("Friends", "serie", "Comedia", "FHD", true, false, 0.0f));
+    titulos.agregarTitulo(Titulo("Avengers: Endgame", "pelicula", "Accion", "UHD", true, true, 2.99f));
+
 
     menu(canciones, titulos);
 
@@ -33,17 +44,30 @@ void cargarCancionesEjemplo(Vector<Cancion>& canciones) {
     canciones.agregar(Cancion("Bohemian Rhapsody", "A Night at the Opera", "Queen", "Rock"));
 }
 
-// Función para cargar títulos de películas/series de ejemplo
-void cargarTitulosEjemplo(Dynarray<Titulo>& titulos) {
-    titulos.agregar(Titulo("Inception", "película", "Sci-Fi", "UHD", true, true, 2.99f));
-    titulos.agregar(Titulo("Breaking Bad", "serie", "Drama", "FHD", true, false, 0.0f));
-    titulos.agregar(Titulo("Interstellar", "película", "Sci-Fi", "FHD", true, false, 0.0f));
-    titulos.agregar(Titulo("Friends", "serie", "Comedia", "FHD", true, false, 0.0f));
-    titulos.agregar(Titulo("Avengers: Endgame", "película", "Acción", "UHD", true, true, 2.99f));
+void buscarCancionPorTitulo(const Vector<Cancion>& canciones, const string& input) {
+    cout << "--- Buscando Cancion por Titulo: '" << input << "' ---" << endl;
+    cout << "(Logica del modulo de musica no implementada)" << endl;
+}
+void buscarCancionPorAlbum(const Vector<Cancion>& canciones, const string& input) {
+    cout << "--- Buscando Cancion por Album: '" << input << "' ---" << endl;
+    cout << "(Logica del modulo de musica no implementada)" << endl;
+}
+void buscarCancionPorGrupo(const Vector<Cancion>& canciones, const string& input) {
+    cout << "--- Buscando Cancion por Grupo: '" << input << "' ---" << endl;
+    cout << "(Logica del modulo de musica no implementada)" << endl;
+}
+void buscarCancionPorGenero(const Vector<Cancion>& canciones, const string& input) {
+    cout << "--- Buscando Cancion por Genero: '" << input << "' ---" << endl;
+    cout << "(Logica del modulo de musica no implementada)" << endl;
+}
+void mostrarTodasLasCanciones(const Vector<Cancion>& canciones) {
+    cout << "--- MOSTRANDO TODAS LAS CANCIONES ---" << endl;
+    cout << "(Logica del modulo de musica no implementada)" << endl;
 }
 
+
 // Función del menú principal
-void menu(Vector<Cancion>& canciones, Dynarray<Titulo>& titulos) {
+void menu(Vector<Cancion>& canciones, DynarrayPEL& titulos) {
     int opcion = 0;
     do {
         cout << "------------------------------\n";
