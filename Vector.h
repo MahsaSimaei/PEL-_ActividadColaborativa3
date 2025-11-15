@@ -115,7 +115,7 @@ public:
     // Elimina el último elemento si el vector no está vacío.
     void pop_back() {
         if (empty()) throw std::out_of_range("pop_back() en un array vacío");
-        --size; // o --space_; según la clase
+        --space_;
     }
 
     // Elimina el elemento en el índice index.
@@ -155,5 +155,6 @@ public:
             ++space_;
         }
     }
+
 };
 #endif //VECTOR_H

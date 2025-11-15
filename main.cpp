@@ -40,32 +40,91 @@ int main() {
 
 // Función para cargar canciones de ejemplo
 void cargarCancionesEjemplo(Vector<Cancion>& canciones) {
-    canciones.agregar(Cancion("Yesterday", "Help!", "The Beatles", "Rock"));
-    canciones.agregar(Cancion("Thriller", "Thriller", "Michael Jackson", "Pop"));
-    canciones.agregar(Cancion("Take Five", "Time Out", "The Dave Brubeck Quartet", "Jazz"));
-    canciones.agregar(Cancion("Shape of You", "Divide", "Ed Sheeran", "Pop"));
-    canciones.agregar(Cancion("Bohemian Rhapsody", "A Night at the Opera", "Queen", "Rock"));
+    canciones.push_back(Cancion("Yesterday", "Help!", "The Beatles", "Rock"));
+    canciones.push_back(Cancion("Thriller", "Thriller", "Michael Jackson", "Pop"));
+    canciones.push_back(Cancion("Take Five", "Time Out", "The Dave Brubeck Quartet", "Jazz"));
+    canciones.push_back(Cancion("Shape of You", "Divide", "Ed Sheeran", "Pop"));
+    canciones.push_back(Cancion("Bohemian Rhapsody", "A Night at the Opera", "Queen", "Rock"));
 }
 
 void buscarCancionPorTitulo(const Vector<Cancion>& canciones, const string& input) {
-    cout << "--- Buscando Cancion por Titulo: '" << input << "' ---" << endl;
-    cout << "(Logica del modulo de musica no implementada)" << endl;
+    cout << "--- Buscando Canción por Título: '" << input << "' ---" << endl;
+    bool encontrado = false;
+    // Usamos size() y operator[] de Vector<T>
+    for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
+        const Cancion& c = canciones[i];
+        if (c.getTitulo().find(input) != string::npos) { // búsqueda por subcadena como buscarTituloPorNombre
+            c.toString();
+            encontrado = true;
+        }
+    }
+    if (!encontrado) {
+        cout << "No se encontraron canciones con ese título o parte del título." << endl;
+    }
+    cout << "---------------------------------" << endl;
 }
+
 void buscarCancionPorAlbum(const Vector<Cancion>& canciones, const string& input) {
-    cout << "--- Buscando Cancion por Album: '" << input << "' ---" << endl;
-    cout << "(Logica del modulo de musica no implementada)" << endl;
+    cout << "--- Buscando Canción por Álbum: '" << input << "' ---" << endl;
+    bool encontrado = false;
+    // Basado en buscarTituloPorGenero (comparación exacta) se usa igualdad,
+    // pero se puede cambiar a find() si prefieres búsqueda parcial.
+    for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
+        const Cancion& c = canciones[i];
+        if (c.getAlbum() == input) {
+            c.toString();
+            encontrado = true;
+        }
+    }
+    if (!encontrado) {
+        cout << "No se encontraron canciones de ese álbum." << endl;
+    }
+    cout << "---------------------------------" << endl;
 }
+
 void buscarCancionPorGrupo(const Vector<Cancion>& canciones, const string& input) {
-    cout << "--- Buscando Cancion por Grupo: '" << input << "' ---" << endl;
-    cout << "(Logica del modulo de musica no implementada)" << endl;
+    cout << "--- Buscando Canción por Grupo: '" << input << "' ---" << endl;
+    bool encontrado = false;
+    for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
+        const Cancion& c = canciones[i];
+        if (c.getGrupo() == input) {
+            c.toString();
+            encontrado = true;
+        }
+    }
+    if (!encontrado) {
+        cout << "No se encontraron canciones de ese grupo." << endl;
+    }
+    cout << "---------------------------------" << endl;
 }
+
 void buscarCancionPorGenero(const Vector<Cancion>& canciones, const string& input) {
-    cout << "--- Buscando Cancion por Genero: '" << input << "' ---" << endl;
-    cout << "(Logica del modulo de musica no implementada)" << endl;
+    cout << "--- Buscando Canción por Género: '" << input << "' ---" << endl;
+    bool encontrado = false;
+    for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
+        const Cancion& c = canciones[i];
+        if (c.getGenero() == input) {
+            c.toString();
+            encontrado = true;
+        }
+    }
+    if (!encontrado) {
+        cout << "No se encontraron canciones de ese género." << endl;
+    }
+    cout << "---------------------------------" << endl;
 }
+
 void mostrarTodasLasCanciones(const Vector<Cancion>& canciones) {
     cout << "--- MOSTRANDO TODAS LAS CANCIONES ---" << endl;
-    cout << "(Logica del modulo de musica no implementada)" << endl;
+    if (canciones.size() == 0) {
+        cout << "No hay canciones cargadas." << endl;
+    } else {
+        for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
+            cout << "---------------------------------" << endl;
+            canciones[i].toString();
+        }
+    }
+    cout << "---------------------------------" << endl;
 }
 
 // Función para cargar títulos de películas/series de ejemplo
@@ -189,25 +248,25 @@ void menu(Vector<Cancion>& canciones, Dynarray<Titulo>& titulos) {
             case 1:
                 cout << "Ingrese el título o parte del título: ";
                 getline(cin, input);
-                canciones.buscarPorTitulo(input);
+                buscarCancionPorTitulo(canciones, input);
                 break;
             case 2:
                 cout << "Ingrese el álbum: ";
                 getline(cin, input);
-                canciones.buscarPorAlbum(input);
+                buscarCancionPorAlbum(canciones, input);
                 break;
             case 3:
                 cout << "Ingrese el grupo: ";
                 getline(cin, input);
-                canciones.buscarPorGrupo(input);
+                buscarCancionPorGrupo(canciones, input);
                 break;
             case 4:
                 cout << "Ingrese el género: ";
                 getline(cin, input);
-                canciones.buscarPorGenero(input);
+                buscarCancionPorGenero(canciones, input);
                 break;
             case 5:
-                canciones.mostrarCanciones();
+                mostrarTodasLasCanciones(canciones);
                 break;
             case 6:
                 cout << "Ingrese el nombre o parte del nombre: ";
