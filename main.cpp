@@ -1,11 +1,28 @@
 #include <iostream>
 #include <string>
+#include <algorithm>  // Para transform, tolower
 #include "Vector.h"
 #include "Cancion.h"
 #include "Dynarray.h"
 #include "Titulo.h"
 
 using namespace std;
+
+// === FUNCIONES AUXILIARES ===
+std::string capitalizarPrimeraLetra(const std::string& texto) {
+    if (texto.empty()) return texto;
+    std::string resultado = texto;
+    std::transform(resultado.begin(), resultado.end(), resultado.begin(),
+                   [](unsigned char c){ return std::tolower(c); });
+    resultado[0] = std::toupper(resultado[0]);
+    return resultado;
+}
+std::string toLower(const std::string& s) {
+    std::string result = s;
+    std::transform(result.begin(), result.end(), result.begin(),
+                   [](unsigned char c) { return std::tolower(c); });
+    return result;
+}
 
 // Prototipos de funciones para el menu
 void cargarCancionesEjemplo(Vector<Cancion>& canciones);
@@ -50,10 +67,10 @@ void cargarCancionesEjemplo(Vector<Cancion>& canciones) {
 void buscarCancionPorTitulo(const Vector<Cancion>& canciones, const string& input) {
     cout << "--- Buscando Cancion por Titulo: '" << input << "' ---" << endl;
     bool encontrado = false;
-    // Usamos size() y operator[] de Vector<T>
+    std::string inputLower = toLower(input);
     for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
         const Cancion& c = canciones[i];
-        if (c.getTitulo().find(input) != string::npos) { // busqueda por subcadena
+        if (toLower(c.getTitulo()).find(inputLower) != string::npos) {
             c.toString();
             encontrado = true;
         }
@@ -67,9 +84,10 @@ void buscarCancionPorTitulo(const Vector<Cancion>& canciones, const string& inpu
 void buscarCancionPorAlbum(const Vector<Cancion>& canciones, const string& input) {
     cout << "--- Buscando Cancion por Album: '" << input << "' ---" << endl;
     bool encontrado = false;
+    string inputNormal = capitalizarPrimeraLetra(input);
     for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
         const Cancion& c = canciones[i];
-        if (c.getAlbum() == input) {
+        if (c.getAlbum() == inputNormal) {
             c.toString();
             encontrado = true;
         }
@@ -83,9 +101,10 @@ void buscarCancionPorAlbum(const Vector<Cancion>& canciones, const string& input
 void buscarCancionPorGrupo(const Vector<Cancion>& canciones, const string& input) {
     cout << "--- Buscando Cancion por Grupo: '" << input << "' ---" << endl;
     bool encontrado = false;
+    string inputNormal = capitalizarPrimeraLetra(input);
     for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
         const Cancion& c = canciones[i];
-        if (c.getGrupo() == input) {
+        if (c.getGrupo() == inputNormal) {
             c.toString();
             encontrado = true;
         }
@@ -99,9 +118,10 @@ void buscarCancionPorGrupo(const Vector<Cancion>& canciones, const string& input
 void buscarCancionPorGenero(const Vector<Cancion>& canciones, const string& input) {
     cout << "--- Buscando Cancion por Genero: '" << input << "' ---" << endl;
     bool encontrado = false;
+    string inputNormal = capitalizarPrimeraLetra(input);
     for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
         const Cancion& c = canciones[i];
-        if (c.getGenero() == input) {
+        if (c.getGenero() == inputNormal) {
             c.toString();
             encontrado = true;
         }
@@ -127,7 +147,6 @@ void mostrarTodasLasCanciones(const Vector<Cancion>& canciones) {
 
 // Funcion para cargar titulos de peliculas/series de ejemplo
 void cargarTitulosEjemplo(Dynarray<Titulo>& titulos) {
-    // Usamos 'push_back'
     titulos.push_back(Titulo("Inception", "pelicula", "Sci-Fi", "UHD", true, true, 2.99f));
     titulos.push_back(Titulo("Breaking Bad", "serie", "Drama", "FHD", true, false, 0.0f));
     titulos.push_back(Titulo("Interstellar", "pelicula", "Sci-Fi", "FHD", true, false, 0.0f));
@@ -138,9 +157,9 @@ void cargarTitulosEjemplo(Dynarray<Titulo>& titulos) {
 void buscarTituloPorNombre(const Dynarray<Titulo>& titulos, const string& input) {
     cout << "--- Buscando por Titulo: '" << input << "' ---" << endl;
     bool encontrado = false;
-    // Usamos 'get_size()' y 'operator[]' del Dynarray generico
+    std::string inputLower = toLower(input);
     for (size_t i = 0; i < titulos.get_size(); ++i) {
-        if (titulos[i].getNombre().find(input) != string::npos) {
+        if (toLower(titulos[i].getNombre()).find(inputLower) != string::npos) {
             cout << titulos[i].toString();
             encontrado = true;
         }
@@ -154,8 +173,9 @@ void buscarTituloPorNombre(const Dynarray<Titulo>& titulos, const string& input)
 void buscarTituloPorGenero(const Dynarray<Titulo>& titulos, const string& input) {
     cout << "--- Buscando por Genero: '" << input << "' ---" << endl;
     bool encontrado = false;
+    string inputNormal = capitalizarPrimeraLetra(input);
     for (size_t i = 0; i < titulos.get_size(); ++i) {
-        if (titulos[i].getGenero() == input) {
+        if (titulos[i].getGenero() == inputNormal) {
             cout << titulos[i].toString();
             encontrado = true;
         }
@@ -169,8 +189,9 @@ void buscarTituloPorGenero(const Dynarray<Titulo>& titulos, const string& input)
 void buscarTituloPorCalidad(const Dynarray<Titulo>& titulos, const string& input) {
     cout << "--- Buscando por Calidad: '" << input << "' ---" << endl;
     bool encontrado = false;
+    string inputNormal = capitalizarPrimeraLetra(input);
     for (size_t i = 0; i < titulos.get_size(); ++i) {
-        if (titulos[i].getCalidad() == input) {
+        if (titulos[i].getCalidad() == inputNormal) {
             cout << titulos[i].toString();
             encontrado = true;
         }
@@ -196,12 +217,12 @@ void mostrarTitulos(const Dynarray<Titulo>& titulos) {
 void alquilarTitulo(Dynarray<Titulo>& titulos, const string& input) {
     cout << ">>> Intentando alquilar '" << input << "'..." << endl;
     bool encontrado = false;
-    // Usamos 'operator[]' para obtener una REFERENCIA y poder modificar
+    string inputNormal = capitalizarPrimeraLetra(input);
     for (size_t i = 0; i < titulos.get_size(); ++i) {
-        if (titulos[i].getNombre() == input) {
+        if (titulos[i].getNombre() == inputNormal) {
             encontrado = true;
             if (titulos[i].isDisponible()) {
-                titulos[i].setDisponibilidad(false); // ¡Modificado!
+                titulos[i].setDisponibilidad(false);
                 cout << "  [EXITO] Titulo '" << input << "' alquilado correctamente." << endl;
                 if (titulos[i].isRequierePagoExtra()) {
                     cout << "  [AVISO] Este titulo requiere un pago extra de "
@@ -210,7 +231,7 @@ void alquilarTitulo(Dynarray<Titulo>& titulos, const string& input) {
             } else {
                 cout << "  [ERROR] El titulo '" << input << "' se encontro, pero no esta disponible." << endl;
             }
-            break; // Salimos del bucle
+            break;
         }
     }
     if (!encontrado) {
@@ -218,10 +239,9 @@ void alquilarTitulo(Dynarray<Titulo>& titulos, const string& input) {
     }
 }
 
-
 // Funcion del menu principal
 void menu(Vector<Cancion>& canciones, Dynarray<Titulo>& titulos) {
-    int opcion = 0;
+    int opcion = -1;
     do {
         cout << "------------------------------\n";
         cout << "      SISTEMA DE CATALOGO\n";
@@ -238,8 +258,15 @@ void menu(Vector<Cancion>& canciones, Dynarray<Titulo>& titulos) {
         cout << "10. Alquilar pelicula/serie\n";
         cout << "0. Salir\n";
         cout << "Seleccione una opcion: ";
-        cin >> opcion;
-        cin.ignore();
+
+        if (!(cin >> opcion)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Entrada no valida. Por favor, ingrese SOLO el numero de la opcion.\n\n";
+            opcion = -1;  // Aseguramos que no sea 0
+            continue;
+        }
+        cin.ignore(10000, '\n');
 
         string input;
         switch (opcion) {
