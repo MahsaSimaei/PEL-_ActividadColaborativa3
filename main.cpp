@@ -7,7 +7,7 @@
 
 using namespace std;
 
-// Prototipos de funciones para el menú
+// Prototipos de funciones para el menu
 void cargarCancionesEjemplo(Vector<Cancion>& canciones);
 void buscarCancionPorTitulo(const Vector<Cancion>& canciones, const string& input);
 void buscarCancionPorAlbum(const Vector<Cancion>& canciones, const string& input);
@@ -15,7 +15,7 @@ void buscarCancionPorGrupo(const Vector<Cancion>& canciones, const string& input
 void buscarCancionPorGenero(const Vector<Cancion>& canciones, const string& input);
 void mostrarTodasLasCanciones(const Vector<Cancion>& canciones);
 
-// --- Prototipos MÓDULO TÍTULOS (Tu Lógica en Funciones Helper) ---
+// --- Prototipos MODULO TITULOS (Tu Logica en Funciones Helper) ---
 void cargarTitulosEjemplo(Dynarray<Titulo>& titulos);
 void buscarTituloPorNombre(const Dynarray<Titulo>& titulos, const string& input);
 void buscarTituloPorGenero(const Dynarray<Titulo>& titulos, const string& input);
@@ -23,7 +23,7 @@ void buscarTituloPorCalidad(const Dynarray<Titulo>& titulos, const string& input
 void mostrarTitulos(const Dynarray<Titulo>& titulos);
 void alquilarTitulo(Dynarray<Titulo>& titulos, const string& input); // No-const, porque modifica
 
-// --- PROTOTIPO MENÚ ---
+// --- PROTOTIPO MENU ---
 void menu(Vector<Cancion>& canciones, Dynarray<Titulo>& titulos);
 
 int main() {
@@ -38,7 +38,7 @@ int main() {
     return 0;
 }
 
-// Función para cargar canciones de ejemplo
+// Funcion para cargar canciones de ejemplo
 void cargarCancionesEjemplo(Vector<Cancion>& canciones) {
     canciones.push_back(Cancion("Yesterday", "Help!", "The Beatles", "Rock"));
     canciones.push_back(Cancion("Thriller", "Thriller", "Michael Jackson", "Pop"));
@@ -48,27 +48,25 @@ void cargarCancionesEjemplo(Vector<Cancion>& canciones) {
 }
 
 void buscarCancionPorTitulo(const Vector<Cancion>& canciones, const string& input) {
-    cout << "--- Buscando Canción por Título: '" << input << "' ---" << endl;
+    cout << "--- Buscando Cancion por Titulo: '" << input << "' ---" << endl;
     bool encontrado = false;
     // Usamos size() y operator[] de Vector<T>
     for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
         const Cancion& c = canciones[i];
-        if (c.getTitulo().find(input) != string::npos) { // búsqueda por subcadena como buscarTituloPorNombre
+        if (c.getTitulo().find(input) != string::npos) { // busqueda por subcadena
             c.toString();
             encontrado = true;
         }
     }
     if (!encontrado) {
-        cout << "No se encontraron canciones con ese título o parte del título." << endl;
+        cout << "No se encontraron canciones con ese titulo o parte del titulo." << endl;
     }
     cout << "---------------------------------" << endl;
 }
 
 void buscarCancionPorAlbum(const Vector<Cancion>& canciones, const string& input) {
-    cout << "--- Buscando Canción por Álbum: '" << input << "' ---" << endl;
+    cout << "--- Buscando Cancion por Album: '" << input << "' ---" << endl;
     bool encontrado = false;
-    // Basado en buscarTituloPorGenero (comparación exacta) se usa igualdad,
-    // pero se puede cambiar a find() si prefieres búsqueda parcial.
     for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
         const Cancion& c = canciones[i];
         if (c.getAlbum() == input) {
@@ -77,13 +75,13 @@ void buscarCancionPorAlbum(const Vector<Cancion>& canciones, const string& input
         }
     }
     if (!encontrado) {
-        cout << "No se encontraron canciones de ese álbum." << endl;
+        cout << "No se encontraron canciones de ese album." << endl;
     }
     cout << "---------------------------------" << endl;
 }
 
 void buscarCancionPorGrupo(const Vector<Cancion>& canciones, const string& input) {
-    cout << "--- Buscando Canción por Grupo: '" << input << "' ---" << endl;
+    cout << "--- Buscando Cancion por Grupo: '" << input << "' ---" << endl;
     bool encontrado = false;
     for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
         const Cancion& c = canciones[i];
@@ -99,7 +97,7 @@ void buscarCancionPorGrupo(const Vector<Cancion>& canciones, const string& input
 }
 
 void buscarCancionPorGenero(const Vector<Cancion>& canciones, const string& input) {
-    cout << "--- Buscando Canción por Género: '" << input << "' ---" << endl;
+    cout << "--- Buscando Cancion por Genero: '" << input << "' ---" << endl;
     bool encontrado = false;
     for (size_t i = 0; i < static_cast<size_t>(canciones.size()); ++i) {
         const Cancion& c = canciones[i];
@@ -109,7 +107,7 @@ void buscarCancionPorGenero(const Vector<Cancion>& canciones, const string& inpu
         }
     }
     if (!encontrado) {
-        cout << "No se encontraron canciones de ese género." << endl;
+        cout << "No se encontraron canciones de ese genero." << endl;
     }
     cout << "---------------------------------" << endl;
 }
@@ -127,7 +125,7 @@ void mostrarTodasLasCanciones(const Vector<Cancion>& canciones) {
     cout << "---------------------------------" << endl;
 }
 
-// Función para cargar títulos de películas/series de ejemplo
+// Funcion para cargar titulos de peliculas/series de ejemplo
 void cargarTitulosEjemplo(Dynarray<Titulo>& titulos) {
     // Usamos 'push_back'
     titulos.push_back(Titulo("Inception", "pelicula", "Sci-Fi", "UHD", true, true, 2.99f));
@@ -140,7 +138,7 @@ void cargarTitulosEjemplo(Dynarray<Titulo>& titulos) {
 void buscarTituloPorNombre(const Dynarray<Titulo>& titulos, const string& input) {
     cout << "--- Buscando por Titulo: '" << input << "' ---" << endl;
     bool encontrado = false;
-    // Usamos 'get_size()' y 'operator[]' del Dynarray genérico
+    // Usamos 'get_size()' y 'operator[]' del Dynarray generico
     for (size_t i = 0; i < titulos.get_size(); ++i) {
         if (titulos[i].getNombre().find(input) != string::npos) {
             cout << titulos[i].toString();
@@ -207,7 +205,7 @@ void alquilarTitulo(Dynarray<Titulo>& titulos, const string& input) {
                 cout << "  [EXITO] Titulo '" << input << "' alquilado correctamente." << endl;
                 if (titulos[i].isRequierePagoExtra()) {
                     cout << "  [AVISO] Este titulo requiere un pago extra de "
-                              << titulos[i].getPrecioAlquiler() << endl;
+                             << titulos[i].getPrecioAlquiler() << endl;
                 }
             } else {
                 cout << "  [ERROR] El titulo '" << input << "' se encontro, pero no esta disponible." << endl;
@@ -221,37 +219,37 @@ void alquilarTitulo(Dynarray<Titulo>& titulos, const string& input) {
 }
 
 
-// Función del menú principal
+// Funcion del menu principal
 void menu(Vector<Cancion>& canciones, Dynarray<Titulo>& titulos) {
     int opcion = 0;
     do {
         cout << "------------------------------\n";
-        cout << "     SISTEMA DE CATÁLOGO\n";
+        cout << "      SISTEMA DE CATALOGO\n";
         cout << "------------------------------\n";
-        cout << "1. Buscar canción por título\n";
-        cout << "2. Buscar canción por álbum\n";
-        cout << "3. Buscar canción por grupo\n";
-        cout << "4. Buscar canción por género\n";
+        cout << "1. Buscar cancion por titulo\n";
+        cout << "2. Buscar cancion por album\n";
+        cout << "3. Buscar cancion por grupo\n";
+        cout << "4. Buscar cancion por genero\n";
         cout << "5. Mostrar todas las canciones\n";
-        cout << "6. Buscar película/serie por título\n";
-        cout << "7. Buscar película/serie por género\n";
-        cout << "8. Buscar película/serie por calidad\n";
-        cout << "9. Mostrar todas las películas/series\n";
-        cout << "10. Alquilar película/serie\n";
+        cout << "6. Buscar pelicula/serie por titulo\n";
+        cout << "7. Buscar pelicula/serie por genero\n";
+        cout << "8. Buscar pelicula/serie por calidad\n";
+        cout << "9. Mostrar todas las peliculas/series\n";
+        cout << "10. Alquilar pelicula/serie\n";
         cout << "0. Salir\n";
-        cout << "Seleccione una opción: ";
+        cout << "Seleccione una opcion: ";
         cin >> opcion;
         cin.ignore();
 
         string input;
         switch (opcion) {
             case 1:
-                cout << "Ingrese el título o parte del título: ";
+                cout << "Ingrese el titulo o parte del titulo: ";
                 getline(cin, input);
                 buscarCancionPorTitulo(canciones, input);
                 break;
             case 2:
-                cout << "Ingrese el álbum: ";
+                cout << "Ingrese el album: ";
                 getline(cin, input);
                 buscarCancionPorAlbum(canciones, input);
                 break;
@@ -261,7 +259,7 @@ void menu(Vector<Cancion>& canciones, Dynarray<Titulo>& titulos) {
                 buscarCancionPorGrupo(canciones, input);
                 break;
             case 4:
-                cout << "Ingrese el género: ";
+                cout << "Ingrese el genero: ";
                 getline(cin, input);
                 buscarCancionPorGenero(canciones, input);
                 break;
@@ -274,7 +272,7 @@ void menu(Vector<Cancion>& canciones, Dynarray<Titulo>& titulos) {
                 buscarTituloPorNombre(titulos, input);
                 break;
             case 7:
-                cout << "Ingrese el género: ";
+                cout << "Ingrese el genero: ";
                 getline(cin, input);
                 buscarTituloPorGenero(titulos, input);
                 break;
@@ -287,15 +285,15 @@ void menu(Vector<Cancion>& canciones, Dynarray<Titulo>& titulos) {
                 mostrarTitulos(titulos);
                 break;
             case 10:
-                cout << "Ingrese el nombre del título a alquilar: ";
+                cout << "Ingrese el nombre del titulo a alquilar: ";
                 getline(cin, input);
                 alquilarTitulo(titulos, input);
                 break;
             case 0:
-                cout << "¡Adiós!\n";
+                cout << "¡Adios!\n";
                 break;
             default:
-                cout << "Opción no válida. Intente de nuevo.\n";
+                cout << "Opcion no valida. Intente de nuevo.\n";
         }
         cout << endl;
     } while (opcion != 0);

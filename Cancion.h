@@ -50,13 +50,13 @@ public:
     // To String (const para poder llamarlo sobre referencias const)
     void toString() const {
         std::cout << "------------------------------------" << std::endl;
-        std::cout << "🎵📀 " << titulo << " 📀🎵" << std::endl;
+        std::cout << "   " << titulo << "   " << std::endl;
         std::cout << "------------------------------------" << std::endl;
         std::cout << " Album:   " << album << std::endl;
         std::cout << " Grupo:    " << grupo << std::endl;
-        std::cout << " Género:   " << genero << std::endl;
+        std::cout << " Genero:   " << genero << std::endl;
         std::cout << "------------------------------------" << std::endl;
-        std::cout << "🎧 Lista de canciones:" << std::endl;
+        std::cout << " Lista de canciones:" << std::endl;
 
         for (std::size_t i = 0; i < static_cast<std::size_t>(canciones.size()); i++) {
             std::cout << "   🎶 #" << i + 1 << " - " << canciones.at(static_cast<int>(i)) << std::endl;
